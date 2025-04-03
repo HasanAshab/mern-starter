@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci --silent
+RUN npm install --silent
 
 
 FROM node:20-alpine

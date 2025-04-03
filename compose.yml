@@ -1,7 +1,7 @@
 services:
   frontend:
     build:
-      context: ./client/src
+      context: ./client
     ports:
       - 3000
     networks:
