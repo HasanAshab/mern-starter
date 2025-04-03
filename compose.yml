@@ -1,0 +1,33 @@
+services:
+  frontend:
+    build:
+      context: ./client/src
+    ports:
+      - 3000
+    networks:
+      - front-back
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ./server
+    ports:
+      - 3000
+    networks:
+      - front-back
+      - back-db
+    depends_on:
+      - db 
+  db:
+    image: mongo:4.2
+    networks:
+      - back-db
+    volumes:
+      - dbdata:/data/db
+
+networks:
+  front-back:
+  back-db:
+  
+volumes:
+  dbdata:
