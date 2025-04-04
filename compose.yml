@@ -3,27 +3,33 @@ services:
     build:
       context: ./client
     ports:
-      - 3000
+      - 3000:3000
     networks:
       - front-back
+    volumes:
+      - ./client:/app
     depends_on:
       - backend
   backend:
     build:
       context: ./server
-    ports:
+    expose:
       - 3000
     networks:
       - front-back
       - back-db
+    volumes:
+      - ./server:/app
     depends_on:
       - db 
   db:
-    image: mongo:4.2
+    image: mongo:5.0
     networks:
       - back-db
     volumes:
       - dbdata:/data/db
+    expose:
+      - 27270
 
 networks:
   front-back:
