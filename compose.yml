@@ -1,3 +1,4 @@
+cat compose.yml
 services:
   frontend:
     build:
@@ -8,6 +9,7 @@ services:
       - front-back
     volumes:
       - ./client:/app
+      - ./app/node_modules
     depends_on:
       - backend
   backend:
@@ -20,8 +22,9 @@ services:
       - back-db
     volumes:
       - ./server:/app
+      - ./app/node_modules
     depends_on:
-      - db 
+      - db
   db:
     image: mongo:5.0
     networks:
@@ -34,6 +37,6 @@ services:
 networks:
   front-back:
   back-db:
-  
+
 volumes:
   dbdata:
