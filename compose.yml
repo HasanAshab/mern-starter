@@ -1,15 +1,12 @@
-cat compose.yml
 services:
   frontend:
     build:
       context: ./client
     ports:
-      - 3000:3000
-    networks:
+      - 3000:3000                                                         networks:
       - front-back
     volumes:
-      - ./client:/app
-      - ./app/node_modules
+      - ./client:/app/frontend
     depends_on:
       - backend
   backend:
@@ -21,8 +18,7 @@ services:
       - front-back
       - back-db
     volumes:
-      - ./server:/app
-      - ./app/node_modules
+      - ./server:/app/backend
     depends_on:
       - db
   db:
@@ -32,7 +28,7 @@ services:
     volumes:
       - dbdata:/data/db
     expose:
-      - 27270
+      - 27017
 
 networks:
   front-back:
